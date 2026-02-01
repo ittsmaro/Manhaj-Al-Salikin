@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منهج السالكين - النسخة المعتمدة</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary: #0f172a; /* Slate 900 */
+            --accent: #ca8a04; /* Yellow 600 */
+            --bg-body: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--bg-body);
+            color: #334155;
+            overflow: hidden; /* Prevent body scroll, handle in containers */
+        }
+
+        /* Smooth Scrolling */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Sidebar Logic */
+        .sidebar {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        
+        /* Mobile: Hidden by default (translated right) */
+        @media (max-width: 1023px) {
+            .sidebar {
+                transform: translateX(100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        /* Desktop: Visible by default */
+        @media (min-width: 1024px) {
+            .sidebar {
+                transform: translateX(0);
+                width: 320px; /* Fixed width for stability */
+            }
+            .sidebar.closed {
+                transform: translateX(100%);
+                margin-right: -320px; /* Pull layout */
+            }
+        }
+
+        /* Active Item Styling */
+        .nav-item.active {
+            background-color: #f8fafc;
+            color: #0f172a;
+            border-right: 4px solid #0f172a;
+            font-weight: 700;
+        }
+        .nav-item.active i {
+            color: #ca8a04;
+            fill: #ca8a04;
+            opacity: 0.2;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Pattern for Landing Page */
+        .islamic-pattern {
+            background-color: #0f172a;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col">
+
+    <!-- ================= 1. LANDING PAGE ================= -->
+    <div id="view-landing" class="fixed inset-0 z-50 islamic-pattern text-white flex flex-col overflow-y-auto">
+        <!-- Glow Effects -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6 py-16 flex-1 flex flex-col items-center relative z-10">
+            
+            <!-- Header Section -->
+            <div class="text-center mb-16 max-w-4xl mx-auto space-y-6">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-slate-800/50 border border-slate-700 rounded-2xl shadow-xl mb-4 backdrop-blur-sm">
+                    <i data-lucide="book-open-check" class="w-10 h-10 text-yellow-500"></i>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
+                    منهج السالكين
+                    <span class="block text-2xl md:text-3xl font-normal text-yellow-500 mt-3 font-serif">وتوضيح الفقه في الدين</span>
+                </h1>
+
+                <!-- Definition -->
+                <div class="mt-8 relative bg-slate-800/30 p-8 rounded-2xl border border-slate-700/50 backdrop-blur-md">
+                    <div class="absolute -top-3 right-8 bg-yellow-600 px-3 py-1 rounded text-xs font-bold text-white uppercase tracking-widest">التعريف بالكتاب</div>
+                    <p class="text-slate-200 text-lg leading-relaxed text-justify md:text-center font-light">
+                        يُعد كتاب "منهج السالكين" متناً فقهياً مختصراً، جمعه مؤلفه بقصد تيسير مسائل الفقه وتقريبها لعموم القراء والمبتدئين في طلب العلم. يتميز الكتاب بأسلوب سهل ممتنع، يبتعد عن تعقيدات الألفاظ واصطلاحات الفقهاء الدقيقة التي قد تصعب على غير المتخصص، مع التركيز على جوهر المسائل الفقهية التي يحتاجها المسلم في عباداته ومعاملاته.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid md:grid-cols-2 gap-6 w-full max-w-6xl mb-16">
+                
+                <!-- Card 1: Methodology -->
+                <div class="group bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-yellow-500/30">
+                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="scale" class="w-6 h-6 text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">منهجية المؤلف</h3>
+                    <p class="text-slate-400 leading-7 text-sm text-justify">
+                        سلك المؤلف في هذا الكتاب مسلكاً وسطاً؛ فهو يعتمد في الغالب على مقررات المذهب الحنبلي، لكنه لا يلتزم به التزاماً تاماً إذا ظهر له رجحان غيره، حيث يميل إلى اختيار القول الذي يعضده الدليل من الكتاب والسنة، مما جعل للكتاب قيمة علمية تمزج بين التأصيل الفقهي والاتباع للدليل.
+                    </p>
+                </div>
+
+                <!-- Card 2: About Author -->
+                <div class="group bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-yellow-500/30">
+                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="user" class="w-6 h-6 text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">عن المؤلف</h3>
+                    <p class="text-slate-400 leading-7 text-sm text-justify">
+                        هو الشيخ عبد الرحمن بن ناصر السعدي (ت 1376هـ)، أحد علماء القصيم البارزين في عصره. عُرف باهتمامه بالتفسير والعقيدة والفقه، وتميزت مؤلفاته بأسلوب تربوي يهدف إلى إيصال المعنى بأيسر طريق. تتلمذ على يديه عدد من العلماء، وكان له أثر ملموس في الحركة العلمية في زمانه من خلال التدريس والتأليف.
+                    </p>
+                </div>
+
+                <!-- Card 3: Importance -->
+                <div class="group bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-yellow-500/30">
+                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="star" class="w-6 h-6 text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">أهمية الكتاب وموقعه العلمي</h3>
+                    <p class="text-slate-400 text-sm mb-4">اكتسب الكتاب قبولاً واسعاً في الأوساط العلمية المعاصرة لعدة أسباب:</p>
+                    <ul class="space-y-3">
+                        <li class="flex gap-3 text-sm text-slate-300">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-2 shrink-0"></span>
+                            <span><strong class="text-white block mb-1">سهولة العبارة:</strong> مما جعله مناسباً للدورات العلمية الأولية ولعوام المسلمين.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-300">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-2 shrink-0"></span>
+                            <span><strong class="text-white block mb-1">الارتباط بالدليل:</strong> حرص المؤلف على ذكر الآية أو الحديث في كثير من المسائل لربط الحكم بمأخذه.</span>
+                        </li>
+                        <li class="flex gap-3 text-sm text-slate-300">
+                            <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full mt-2 shrink-0"></span>
+                            <span><strong class="text-white block mb-1">شمولية الأبواب:</strong> رغم اختصاره، فقد أتى على جل أبواب الفقه الرئيسية.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Commentaries -->
+                <div class="group bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-yellow-500/30">
+                    <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="library" class="w-6 h-6 text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">أبرز الشروحات المعتمدة</h3>
+                    <p class="text-slate-400 text-sm mb-4">نظراً لأهمية المتن، اعتنى بشرحه ثلة من أهل العلم المعاصرين، ومن الشروحات التي يُنصح بها:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 p-2 rounded hover:bg-white/5 transition-colors">
+                            <i data-lucide="book" class="w-4 h-4 text-yellow-500 mt-1 shrink-0"></i>
+                            <div class="text-sm text-slate-300">
+                                <span class="text-white font-medium block">تيسير العلام شرح منهج السالكين</span>
+                                <span class="text-xs text-slate-500">شرح يعتني بالدليل والتعليل</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-2 rounded hover:bg-white/5 transition-colors">
+                            <i data-lucide="book" class="w-4 h-4 text-yellow-500 mt-1 shrink-0"></i>
+                            <div class="text-sm text-slate-300">
+                                <span class="text-white font-medium block">إرشاد السائرين إلى منهج السالكين</span>
+                                <span class="text-xs text-slate-500">للشيخ د. سليمان الرحيلي (يتميز بالتحرير والتدقيق)</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-2 rounded hover:bg-white/5 transition-colors">
+                            <i data-lucide="book" class="w-4 h-4 text-yellow-500 mt-1 shrink-0"></i>
+                            <div class="text-sm text-slate-300">
+                                <span class="text-white font-medium block">شرح الشيخ عبد الله بن جبرين</span>
+                                <span class="text-xs text-slate-500">شرح موسع ومفيد</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-2 rounded hover:bg-white/5 transition-colors">
+                            <i data-lucide="book" class="w-4 h-4 text-yellow-500 mt-1 shrink-0"></i>
+                            <div class="text-sm text-slate-300">
+                                <span class="text-white font-medium block">شرح الشيخ د. سليمان القصير</span>
+                                <span class="text-xs text-slate-500">شرح يفكك عبارات المتن بوضوح</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="text-center pb-8 w-full">
+                <p class="text-slate-400 text-sm mb-8 max-w-lg mx-auto leading-6">
+                    هذا الموقع مخصص لخدمة هذا المتن وتقريبه، من خلال جمع شروحه وتسهيل الوصول إلى مادة الكتاب العلمية.
+                </p>
+
+                <button onclick="app.showReader()" class="group relative inline-flex items-center gap-3 px-8 py-4 bg-yellow-600 hover:bg-yellow-500 text-white rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-yellow-900/20 hover:shadow-yellow-600/30 hover:scale-105">
+                    <span>تصفح المتن والشرح</span>
+                    <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+        
+        <footer class="py-6 text-center text-slate-600 text-xs border-t border-slate-800 bg-slate-900/50">
+            جميع الحقوق محفوظة © 2024
+        </footer>
+    </div>
+
+    <!-- ================= 2. MAIN READER APP ================= -->
+    <div id="view-reader" class="flex-1 flex flex-col h-full hidden bg-white">
+        
+        <!-- Header -->
+        <header class="h-16 bg-white border-b border-gray-200 shrink-0 flex items-center justify-between px-4 z-30 shadow-sm">
+            <div class="flex items-center gap-3">
+                <button onclick="app.toggleSidebar()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors text-slate-700">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <h2 class="font-bold text-slate-800 text-lg hidden sm:block">منهج السالكين</h2>
+            </div>
+
+            <!-- Header Title (Changes dynamically) -->
+            <div class="flex-1 text-center px-4 truncate">
+                <span id="header-title" class="text-sm font-medium text-slate-600 bg-slate-50 px-3 py-1 rounded-full border border-slate-100">
+                    المقدمة
+                </span>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="app.showLanding()" class="p-2 hover:bg-red-50 text-slate-500 hover:text-red-600 rounded-lg transition-colors flex items-center gap-2" title="الرئيسية">
+                    <span class="text-xs font-bold hidden sm:block">الرئيسية</span>
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Body Layout -->
+        <div class="flex-1 flex overflow-hidden relative">
+            
+            <!-- Sidebar (Table of Contents) -->
+            <aside id="sidebar" class="sidebar bg-white border-l border-gray-200 h-full flex flex-col absolute lg:relative z-20 shadow-2xl lg:shadow-none w-80">
+                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <span class="font-bold text-slate-700 text-sm">فهرس الكتاب</span>
+                    <button onclick="app.toggleSidebar()" class="lg:hidden p-1 text-gray-500 hover:bg-gray-200 rounded">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <!-- TOC List Container -->
+                <div id="toc-container" class="flex-1 overflow-y-auto custom-scrollbar p-1 pb-20">
+                    <!-- Items injected by JS -->
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 bg-slate-50 relative flex flex-col min-w-0">
+                
+                <!-- Scrollable Content -->
+                <div id="content-scroll" class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12 scroll-smooth custom-scrollbar">
+                    <div class="max-w-4xl mx-auto min-h-[80vh]">
+                        
+                        <!-- Content Card -->
+                        <div id="content-card" class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-12 animate-fade">
+                            <div class="text-center border-b border-gray-100 pb-6 mb-8">
+                                <span class="text-xs font-bold text-yellow-600 tracking-wider uppercase mb-2 block">الفصل الحالي</span>
+                                <h1 id="page-title" class="text-2xl md:text-3xl font-black text-slate-900 leading-normal">
+                                    <!-- Title Here -->
+                                </h1>
+                            </div>
+
+                            <!-- Content Sections (Matn & Sharh) -->
+                            <div class="space-y-8">
+                                
+                                <!-- MATN SECTION -->
+                                <section class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                                    <div class="bg-white px-6 py-4 border-b border-slate-200 flex items-center gap-3">
+                                        <div class="w-1.5 h-6 bg-yellow-500 rounded-full"></div>
+                                        <h3 class="font-bold text-xl text-slate-800">المتن</h3>
+                                    </div>
+                                    <div class="p-8 prose prose-lg prose-slate max-w-none text-justify leading-loose text-slate-600 min-h-[150px] flex items-center justify-center">
+                                        <!-- Placeholder for Matn -->
+                                        <p class="text-sm text-slate-400 font-medium">مساحة مخصصة لإدراج نص المتن هنا</p>
+                                    </div>
+                                </section>
+
+                                <!-- SHARH SECTION (Targeted via ID) -->
+                                <section id="sharh-section" class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                                    <div class="bg-white px-6 py-4 border-b border-slate-200 flex items-center gap-3">
+                                        <div class="w-1.5 h-6 bg-slate-700 rounded-full"></div>
+                                        <h3 class="font-bold text-xl text-slate-800">الشرح</h3>
+                                    </div>
+                                    <div class="p-8 prose prose-lg prose-slate max-w-none text-justify leading-loose text-slate-600 min-h-[150px] flex items-center justify-center">
+                                        <!-- Placeholder for Sharh -->
+                                        <p class="text-sm text-slate-400 font-medium">مساحة مخصصة لإدراج الشرح والتعليقات هنا</p>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer Navigation -->
+                <div class="bg-white border-t border-gray-200 p-4 flex justify-between items-center shadow-lg z-10 shrink-0">
+                    <button id="btn-prev" onclick="app.navigate(-1)" class="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        <span class="font-bold text-sm hidden sm:block">السابق</span>
+                    </button>
+
+                    <span class="text-xs font-mono text-slate-400" id="progress-text">1 / 100</span>
+
+                    <button id="btn-next" onclick="app.navigate(1)" class="flex items-center gap-2 px-6 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md">
+                        <span class="font-bold text-sm hidden sm:block">التالي</span>
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+            </main>
+
+            <!-- Overlay for Mobile -->
+            <div id="overlay" onclick="app.toggleSidebar()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-10 hidden lg:hidden transition-opacity"></div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        const app = {
+            // === DATA: INDEX PRESERVED ===
+            index: [
+                { title: "مقدمة", type: "intro" },
+                { title: "الأحكام خمسة", type: "sub" },
+                
+                // كتاب الطهارة
+                { title: "كتاب الطهارة", type: "main" },
+                { title: "باب أحكام المياه", type: "sub" },
+                { title: "باب أحكام الآنية", type: "sub" },
+                { title: "باب الاستنجاء وآداب قضاء الحاجة", type: "sub" },
+                { title: "باب صفة الوضوء", type: "sub" },
+                { title: "باب المسح على الخفين", type: "sub" },
+                { title: "باب نواقض الوضوء", type: "sub" },
+                { title: "باب ما يوجب الغسل وصفته", type: "sub" },
+                { title: "باب التيمم", type: "sub" },
+                { title: "باب الحيض", type: "sub" },
+                
+                // كتاب الصلاة
+                { title: "كتاب الصلاة", type: "main" },
+                { title: "باب شروط الصلاة", type: "sub" },
+                { title: "باب صفة الصلاة", type: "sub" },
+                { title: "باب أركان الصلاة وواجباتها", type: "sub" },
+                { title: "باب سجود السهو", type: "sub" },
+                { title: "باب صلاة التطوع", type: "sub" },
+                { title: "باب صلاة الجماعة والإمامة", type: "sub" },
+                { title: "باب صلاة أهل الأعذار", type: "sub" },
+                { title: "باب صلاة الجمعة", type: "sub" },
+                { title: "باب صلاة العيدين", type: "sub" },
+                
+                // كتاب الجنائز
+                { title: "كتاب الجنائز", type: "main" },
+                
+                // كتاب الزكاة
+                { title: "كتاب الزكاة", type: "main" },
+                { title: "باب زكاة الفطر", type: "sub" },
+                { title: "باب أهل الزكاة ومن تدفع له", type: "sub" },
+                
+                // كتاب الصيام
+                { title: "كتاب الصيام", type: "main" },
+                
+                // كتاب الحج
+                { title: "كتاب الحج", type: "main" },
+                { title: "باب الهدي والأضحية والعقيقة", type: "sub" },
+                
+                // كتاب الجهاد
+                { title: "كتاب الجهاد", type: "main" },
+
+                // كتاب البيوع
+                { title: "كتاب البيوع", type: "main" },
+                { title: "باب بيع الأصول والثمار", type: "sub" },
+                { title: "باب الخيار وغيره", type: "sub" },
+                { title: "باب السلم", type: "sub" },
+                { title: "باب الرهن والضمان والكفالة", type: "sub" },
+                { title: "باب الحجر لفلس أو غيره", type: "sub" },
+                { title: "باب الصلح", type: "sub" },
+                { title: "باب الوكالة والشركة والمساقاة والمزارعة", type: "sub" },
+                { title: "باب إحياء الموات", type: "sub" },
+                { title: "باب الجعالة والإجارة", type: "sub" },
+                { title: "باب اللقطة", type: "sub" },
+                { title: "باب المسابقة والمغالبة", type: "sub" },
+                { title: "باب الغصب", type: "sub" },
+                { title: "باب العارية والوديعة", type: "sub" },
+                { title: "باب الشفعة", type: "sub" },
+                { title: "باب الوقف", type: "sub" },
+                { title: "باب الهبة والعطية والوصية", type: "sub" },
+                
+                // كتاب المواريث والعتق
+                { title: "كتاب المواريث", type: "main" },
+                { title: "باب العتق", type: "sub" },
+                { title: "باب الكتابة", type: "sub" },
+
+                // كتاب النكاح
+                { title: "كتاب النكاح", type: "main" },
+                { title: "باب شروط النكاح", type: "sub" },
+                { title: "باب المحرمات في النكاح", type: "sub" },
+                { title: "باب الشروط في النكاح", type: "sub" },
+                { title: "باب العيوب في النكاح", type: "sub" },
+                
+                // كتاب الصداق
+                { title: "كتاب الصداق", type: "main" },
+                { title: "باب عشرة النساء", type: "sub" },
+                { title: "باب الخلع", type: "sub" },
+                
+                // كتاب الطلاق
+                { title: "كتاب الطلاق", type: "main" },
+                { title: "فصل الحر يملك ثلاث طلقات", type: "sub" },
+                { title: "باب الإيلاء والظهار واللعان", type: "sub" },
+                
+                { title: "كتاب العدد والاستبراء", type: "main" },
+                { title: "باب النفقات للزوجات والأقارب والمماليك والحضانة", type: "sub" },
+                { title: "كتاب الأطعمة", type: "main" },
+                { title: "باب الذكاة والصيد", type: "sub" },
+                { title: "باب الأيمان والنذور", type: "sub" },
+                { title: "كتاب الجنايات", type: "main" },
+                { title: "كتاب الحدود", type: "main" },
+                { title: "باب حكم المرتد", type: "sub" },
+                { title: "كتاب القضاء والدعاوى والبينات وأنواع الشهادات", type: "main" },
+                { title: "باب القسمة", type: "sub" },
+                { title: "باب الإقرار", type: "sub" }
+            ],
+
+            state: {
+                currentIndex: 0,
+                isSidebarOpen: window.innerWidth >= 1024
+            },
+
+            // === UI ELEMENTS ===
+            elements: {
+                landing: document.getElementById('view-landing'),
+                reader: document.getElementById('view-reader'),
+                sidebar: document.getElementById('sidebar'),
+                overlay: document.getElementById('overlay'),
+                tocContainer: document.getElementById('toc-container'),
+                pageTitle: document.getElementById('page-title'),
+                headerTitle: document.getElementById('header-title'),
+                contentCard: document.getElementById('content-card'),
+                btnPrev: document.getElementById('btn-prev'),
+                btnNext: document.getElementById('btn-next'),
+                progressText: document.getElementById('progress-text'),
+                scrollArea: document.getElementById('content-scroll')
+            },
+
+            // === INITIALIZATION ===
+            init() {
+                lucide.createIcons();
+                this.renderTOC();
+                
+                // Initial Mobile State
+                if (window.innerWidth < 1024) {
+                    this.state.isSidebarOpen = false;
+                }
+                
+                // Clean Resize Listener
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        const isDesktop = window.innerWidth >= 1024;
+                        if (isDesktop && !this.state.isSidebarOpen) {
+                            this.elements.sidebar.classList.remove('open');
+                            this.elements.sidebar.style.transform = 'translateX(0)';
+                            this.elements.overlay.classList.add('hidden');
+                        } else if (!isDesktop) {
+                            this.elements.sidebar.style.transform = ''; // Clear inline to let CSS class handle it
+                            if (!this.state.isSidebarOpen) {
+                                this.elements.sidebar.classList.remove('open');
+                            }
+                        }
+                    }, 100);
+                });
+            },
+
+            // === RENDER LOGIC (Smart Performance: DocumentFragment) ===
+            renderTOC() {
+                const fragment = document.createDocumentFragment();
+                
+                this.index.forEach((item, idx) => {
+                    const btn = document.createElement('button');
+                    const isMain = item.type === 'main' || item.type === 'intro';
+                    
+                    // Base Classes
+                    let className = "nav-item w-full text-right px-4 py-3 text-sm transition-all duration-200 flex items-center gap-3 border-b border-gray-50 ";
+                    
+                    if (isMain) {
+                        className += "font-bold text-slate-800 bg-white hover:bg-gray-50 mt-1";
+                    } else {
+                        className += "text-slate-500 hover:text-slate-900 hover:bg-slate-50 mr-2 border-r border-gray-100 pr-6"; // Indent sub-chapters
+                    }
+
+                    btn.className = className;
+                    btn.dataset.index = idx; // Store index in DOM
+                    
+                    // Icon Selection
+                    const iconType = isMain ? 'book' : 'circle';
+                    const iconSize = isMain ? 'w-4 h-4' : 'w-2 h-2';
+                    const iconClass = isMain ? 'text-yellow-600' : 'text-gray-300';
+                    
+                    btn.innerHTML = `
+                        <i data-lucide="${iconType}" class="${iconSize} ${iconClass}"></i>
+                        <span class="truncate leading-relaxed">${item.title}</span>
+                    `;
+                    
+                    // Optimized Event Listener (Direct Function Call)
+                    btn.onclick = () => {
+                        this.loadPage(idx);
+                        if (window.innerWidth < 1024) this.toggleSidebar();
+                    };
+
+                    fragment.appendChild(btn);
+                });
+
+                this.elements.tocContainer.appendChild(fragment);
+                lucide.createIcons(); // Re-scan for new icons
+            },
+
+            // === NAVIGATION ===
+            showReader() {
+                this.elements.landing.classList.add('hidden');
+                this.elements.reader.classList.remove('hidden');
+                this.loadPage(0);
+            },
+
+            showLanding() {
+                this.elements.reader.classList.add('hidden');
+                this.elements.landing.classList.remove('hidden');
+            },
+
+            loadPage(index) {
+                if (index < 0 || index >= this.index.length) return;
+                
+                this.state.currentIndex = index;
+                const item = this.index[index];
+
+                // Update UI Texts
+                this.elements.pageTitle.textContent = item.title;
+                this.elements.headerTitle.textContent = item.title;
+                this.elements.progressText.textContent = `${index + 1} / ${this.index.length}`;
+
+                // Logic to Hide Sharh on Introduction & 5 Rulings
+                const sharhSection = document.getElementById('sharh-section');
+                if (index === 0 || index === 1) { // Intro or 5 Rulings
+                    sharhSection.classList.add('hidden');
+                } else {
+                    sharhSection.classList.remove('hidden');
+                }
+
+                // Animate Content (Subtle Fade)
+                this.elements.contentCard.classList.remove('animate-fade');
+                void this.elements.contentCard.offsetWidth; // Force Reflow
+                this.elements.contentCard.classList.add('animate-fade');
+
+                // Scroll to top
+                this.elements.scrollArea.scrollTop = 0;
+
+                // Update Buttons
+                this.elements.btnPrev.disabled = index === 0;
+                this.elements.btnNext.disabled = index === this.index.length - 1;
+
+                this.updateActiveSidebar();
+            },
+
+            navigate(dir) {
+                this.loadPage(this.state.currentIndex + dir);
+            },
+
+            // === SIDEBAR HANDLING (Performance Optimized) ===
+            updateActiveSidebar() {
+                // Remove active class from all
+                const items = this.elements.tocContainer.children;
+                for (let btn of items) {
+                    btn.classList.remove('active');
+                }
+
+                // Add to current
+                const activeBtn = items[this.state.currentIndex];
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                    // Scroll sidebar to item
+                    activeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            },
+
+            toggleSidebar() {
+                this.state.isSidebarOpen = !this.state.isSidebarOpen;
+                const sb = this.elements.sidebar;
+                const ol = this.elements.overlay;
+                
+                if (window.innerWidth < 1024) {
+                    // Mobile Toggle
+                    if (this.state.isSidebarOpen) {
+                        sb.classList.add('open');
+                        ol.classList.remove('hidden');
+                    } else {
+                        sb.classList.remove('open');
+                        ol.classList.add('hidden');
+                    }
+                } else {
+                    // Desktop Toggle (Slide out)
+                    if (this.state.isSidebarOpen) {
+                        sb.classList.remove('closed');
+                    } else {
+                        sb.classList.add('closed');
+                    }
+                }
+            }
+        };
+
+        // Start App
+        window.addEventListener('DOMContentLoaded', () => app.init());
+
+    </script>
+</body>
+</html>
